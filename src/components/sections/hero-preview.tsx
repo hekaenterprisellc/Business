@@ -3,14 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
-import {
-  Star,
-  MessageCircle,
-  ShoppingCart,
-  ArrowUpRight,
-  Globe,
-  Palette,
-} from "lucide-react";
+import { Star, ShoppingCart, ArrowUpRight, Globe, Palette } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Slide = {
@@ -19,16 +12,16 @@ type Slide = {
   title: string;
   sub: string;
   cta: string;
-  icon: typeof MessageCircle;
+  icon: typeof Globe;
   image: string;
   accent: string;
   overlay: string;
 };
 
 const SLIDES: Slide[] = [
-  { id: "site", badge: "Business website", title: "Sweet Crumbs Bakery", sub: "Open today · Kileleshwa", cta: "Order on WhatsApp", icon: Globe, image: "/heka/preview-website.png", accent: "bg-terracotta text-cream", overlay: "from-ink/60 via-ink/15 to-transparent" },
-  { id: "store", badge: "Online store", title: "M-Pesa checkout", sub: "Till confirmed · KES 1,250", cta: "Pay with M-Pesa", icon: ShoppingCart, image: "/heka/preview-mpesa.png", accent: "bg-forest text-cream", overlay: "from-ink/60 via-ink/15 to-transparent" },
-  { id: "brand", badge: "Brand identity", title: "Mara Atelier", sub: "Logo · palette · signage", cta: "See the brand kit", icon: Palette, image: "/heka/preview-brand.png", accent: "bg-clay text-ink", overlay: "from-ink/55 via-ink/10 to-transparent" },
+  { id: "site", badge: "Business website", title: "Sweet Crumbs Bakery", sub: "Open today · Kileleshwa", cta: "Order on WhatsApp", icon: Globe, image: "/heka/preview-website.svg", accent: "bg-terracotta text-cream", overlay: "from-ink/60 via-ink/15 to-transparent" },
+  { id: "store", badge: "Online store", title: "M-Pesa checkout", sub: "Till confirmed · KES 1,250", cta: "Pay with M-Pesa", icon: ShoppingCart, image: "/heka/preview-mpesa.svg", accent: "bg-forest text-cream", overlay: "from-ink/60 via-ink/15 to-transparent" },
+  { id: "brand", badge: "Brand identity", title: "Mara Atelier", sub: "Logo · palette · signage", cta: "See the brand kit", icon: Palette, image: "/heka/preview-brand.svg", accent: "bg-clay text-ink", overlay: "from-ink/55 via-ink/10 to-transparent" },
 ];
 
 export function HeroPreview() {
