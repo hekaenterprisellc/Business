@@ -44,23 +44,18 @@ export function Contact() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    const payload = {
-      name: data.get("name"),
-      email: data.get("email"),
-      business: data.get("business"),
-      need: data.get("need"),
-    };
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/__forms.html", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(
+          Array.from(data.entries(), ([key, value]) => [key, String(value)])
+        ).toString(),
       });
-      const json = await res.json();
-      if (!res.ok || !json.ok) {
-        throw new Error(json.error || "Could not send your message.");
+      if (!res.ok) {
+        throw new Error("Could not send your message. Please try again.");
       }
       setDone(true);
       form.reset();
@@ -185,7 +180,21 @@ export function Contact() {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+                  <p className="hidden" aria-hidden="true">
+                    <label>
+                      Don&apos;t fill this out:
+                      <input name="bot-field" tabIndex={-1} autoComplete="off" />
+                    </label>
+                  </p>
                   <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                     <Field
                       label="Your name"
